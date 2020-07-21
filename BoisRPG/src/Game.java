@@ -31,7 +31,7 @@ public class Game {
         System.out.println("your initial health: " + player.getHealth());
         System.out.println("You encounter a goblin.. goblin attacks you for 10 damage");
         //do some random roll for an encounter - I encounter a goblin
-        Enemy goblin = new Enemy();
+        Goblin goblin = new Goblin(); //let's say this enemy's lootRoll is 9, if it's a 9,
         goblin.setAttack(10);
         System.out.println("Your health is now: " + player.getHealth());
         //lets say I kill the goblin. goblin drops some coins

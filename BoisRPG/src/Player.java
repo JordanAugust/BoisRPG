@@ -4,6 +4,8 @@ public class Player {
 
     private int health;
     private int attack;
+    private int level;
+    private int xp;
     private String attackType;
     private String race;
     private String name;
@@ -13,6 +15,8 @@ public class Player {
     public Player(int health, int attack, String name, String race, boolean alive) {
         this.health = health;
         this.attack = attack;
+        this.xp = 0;
+        this.level = 1;
         this.name = name;
         this.race = race;
         this.alive = alive;
@@ -33,6 +37,22 @@ public class Player {
 
     public int getAttack() {
         return attack;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 
     public void setAttackType(String attackType) {
@@ -74,7 +94,6 @@ public class Player {
     public ArrayList<Item> getInventory() {
         return inventory;
     }
-
 
     public void healthCheck() {
         if (getHealth() > 0) {
