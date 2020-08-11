@@ -1,19 +1,58 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ShopKeeper extends NPC {
+public class ArcadiumsShop extends Location {
+    private ArrayList<NPC> people = new ArrayList<>();
+    private Arcadium arcadium = new Arcadium();
+    private MagicMan magicMan = new MagicMan();
 
-    public ShopKeeper() {
-        Coins coins = new Coins("coins", 1000);
-        this.addItemToInventory(coins);
+    public ArcadiumsShop(String locationName) {
+        super(locationName);
+        this.people.add(this.arcadium);
+        this.people.add(this.magicMan);
+    }
+
+    public ArrayList<NPC> getPeople() {
+        return people;
+    }
+
+    public void setPeople(ArrayList<NPC> people) {
+        this.people = people;
+    }
+}
+
+class Arcadium extends NPC {
+
+    public Arcadium() {
+        this.setName("Arcadium");
+        Item test = new Item("test item", 1000);
+        this.addItemToInventory(test);
+    }
+
+    public void talk(Player player) {
+//        super.talk(player); // just so you know, this is how you would call the parent's talk method
+        System.out.println("Greetings, " + player.getRace());
+        if (player.getRace().equals("elf")) {
+            System.out.println("Have you earned enough money for your record?"); // create while loop where player can choose y or n and then check coins
+        }
+        // need to expand this to finish the elf quest, to unlock the record
+
+    }
+}
+
+class MagicMan extends ShopKeeper {
+    public MagicMan() {
+        this.setName("Magic Man");
+
 
     }
 
     public void talk(Player player) {
+        this.populateInventory(player);
         Scanner scanner = new Scanner(System.in);
         // we can give player option to return to town or not, but we are not going to right now
         System.out.println("Welcome to my shoppe!");
-        System.out.println("Would you like to 'buy' or 'sell'?");
+        System.out.println("Would you like to 'buy' or 'sell'?"); // first, we are going to implement a town method that gives them the option to go to the shop and go to other parts of the town
         System.out.print("> ");
         String userResponse = scanner.next();
         userResponse = userResponse.toLowerCase();
@@ -119,9 +158,18 @@ public class ShopKeeper extends NPC {
                 }
             }
         }
-    } // end of talk()
+    }
+
 
     public void populateInventory(Player player) {
+        if (player.getLevel() < 3) {
 
+//            Coins coins = new Coins("coins", 1000); // Coins has a newCoinsValue method that we can use here
+//            this.addItemToInventory(coins);
+            Potion lesserManaPotion1 = new Potion("mana potion", 15, 5);
+            Potion lesserManaPotion2 = new Potion("mana potion", 15, 5);
+            this.addItemToInventory(lesserManaPotion1);
+            this.addItemToInventory(lesserManaPotion2);
+        }
     }
 }
